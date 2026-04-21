@@ -15,7 +15,8 @@ import {
   ArrowRight,
   TrendingUp,
   RefreshCcw,
-  Sparkles
+  Sparkles,
+  Zap
 } from 'lucide-react';
 
 const TOTAL_TIME = 10 * 60; // 10 minutes in seconds
