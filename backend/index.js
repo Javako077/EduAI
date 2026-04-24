@@ -11,9 +11,19 @@ app.use(cors({
 }));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/futureedu')
+// MongoDB Connection
+mongoose.set('bufferCommands', false);
+
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/futureedu', {
+  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+})
   .then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => console.error('❌ DB error:', err));
+  .catch((err) => {
+    console.error('❌ MongoDB Connection Error:', err.message);
+    if (err.message.includes('ETIMEOUT') || err.message.includes('selection timed out')) {
+      console.error('👉 TIP: Check if your IP is whitelisted in MongoDB Atlas (0.0.0.0/0 for hosting).');
+    }
+  });
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/ai', require('./routes/chat'));
