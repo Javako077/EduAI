@@ -2,13 +2,15 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const sign = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+const JWT_SECRET = process.env.JWT_SECRET || 'futureedu_default_secret_key';
+
+const sign = (id) => jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d' });
 
 function auth(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ message: 'No token' });
   try {
-    req.userId = jwt.verify(token, process.env.JWT_SECRET).id;
+    req.userId = jwt.verify(token, JWT_SECRET).id;
     next();
   } catch {
     res.status(401).json({ message: 'Invalid token' });
