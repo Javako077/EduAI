@@ -1,4 +1,5 @@
 import { useSettings } from '../context/SettingsContext';
+import { Moon, LayoutGrid,Bell} from 'lucide-react';
 
 const ACCENTS = [
   { key: 'indigo',  label: 'Indigo',  bg: 'bg-indigo-500' },
@@ -67,12 +68,12 @@ export default function Settings() {
         </div>
 
         {/* Appearance */}
-        <Section title="🎨 Appearance" desc="Personalize how FutureEdu looks">
-          <Row icon="🌙" label="Dark Mode" desc="Switch to a darker interface">
+        <Section title=" Appearance" desc="Personalize how FutureEdu looks">
+         <Row icon={<Moon size={18} />} label="Dark Mode" desc="Switch to a darker interface">
             <Toggle value={settings.darkMode} onChange={v => update('darkMode', v)} />
           </Row>
 
-          <Row icon="📐" label="Compact Mode" desc="Reduce spacing for more content">
+          <Row icon={<LayoutGrid size={18} />} label="Compact Mode" desc="Reduce spacing for more content">
             <Toggle value={settings.compactMode} onChange={v => update('compactMode', v)} />
           </Row>
 
@@ -122,13 +123,13 @@ export default function Settings() {
 
         {/* Notifications */}
         <Section title="🔔 Notifications" desc="Control alerts and reminders">
-          <Row icon="🔔" label="Push Notifications" desc="Get reminders to keep learning">
+         <Row icon={<Bell size={18} />} label="Push Notifications" desc="Get reminders to keep learning">
             <Toggle value={settings.notifications} onChange={v => update('notifications', v)} />
           </Row>
         </Section>
 
         {/* About */}
-        <Section title="ℹ️ About">
+        <Section title="About">
           <div className="space-y-3 text-sm">
             {[
               { label: 'App Name',   value: 'FutureEdu AI Teacher' },

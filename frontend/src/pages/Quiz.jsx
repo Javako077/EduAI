@@ -121,8 +121,8 @@ export default function Quiz() {
               <div className="relative group">
                 <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Practice Topic</label>
                 <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    <Sparkles size={20} />
+                  <div className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors">
+                    <Sparkles size={0} />
                   </div>
                   <input
                     value={topic}

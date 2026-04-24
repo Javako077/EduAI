@@ -59,7 +59,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-screen chat-container">
+    <div className="flex flex-col min-h-screen chat-container">
       {/* Top Bar */}
       <div className="bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between flex-shrink-0 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-4">
@@ -109,7 +109,7 @@ export default function Chat() {
           <div key={i} className={`flex items-end gap-3 animate-fade-in ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             {m.role === 'assistant' && (
               <div className="w-9 h-9 rounded-xl overflow-hidden mb-1 avatar-shadow border border-white/20">
-                <img src="/logo.jpeg" alt="AI Teacher" className="w-full h-full object-cover" />
+                <img src="/mindlogo.png" alt="AI Teacher" className="w-full h-full object-cover" />
               </div>
             )}
             <div className={`max-w-[82%] px-5 py-4 rounded-3xl text-[0.925rem] leading-relaxed markdown-content ${
@@ -130,7 +130,7 @@ export default function Chat() {
         {loading && (
           <div className="flex items-end gap-3 animate-fade-in">
             <div className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0 avatar-shadow border border-white/20">
-              <img src="/logo.jpeg" alt="AI Teacher" className="w-full h-full object-cover" />
+              <img src="/mindlogo.png" alt="AI Teacher" className="w-full h-full object-cover" />
             </div>
             <div className="chat-bubble-assistant px-5 py-4 rounded-3xl rounded-bl-none">
               <div className="flex gap-1.5 items-center">

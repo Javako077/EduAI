@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+import { Star, Lightbulb, Bug, MessageCircle } from 'lucide-react';
 
 const TYPES = [
-  { key: 'compliment', label: 'Compliment', icon: '🌟', color: 'border-yellow-400 bg-yellow-50 text-yellow-700' },
-  { key: 'suggestion', label: 'Suggestion', icon: '💡', color: 'border-blue-400 bg-blue-50 text-blue-700' },
-  { key: 'bug',        label: 'Bug Report', icon: '🐛', color: 'border-red-400 bg-red-50 text-red-700' },
-  { key: 'other',      label: 'Other',      icon: '💬', color: 'border-gray-400 bg-gray-50 text-gray-700' },
+  { key: 'compliment', label: 'Compliment', icon: <Star size={22} />, color: 'border-yellow-400 bg-yellow-50 text-yellow-700' },
+  { key: 'suggestion', label: 'Suggestion', icon: <Lightbulb size={22} />, color: 'border-blue-400 bg-blue-50 text-blue-700' },
+  { key: 'bug',        label: 'Bug Report', icon: <Bug size={22} />, color: 'border-red-400 bg-red-50 text-red-700' },
+  { key: 'other',      label: 'Other',      icon: <MessageCircle size={22} />, color: 'border-gray-400 bg-gray-50 text-gray-700' },
 ];
 
 function StarRating({ value, onChange }) {

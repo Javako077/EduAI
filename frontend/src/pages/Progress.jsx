@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+import { FileText, Trophy, Target, BookOpen } from 'lucide-react';
 
 function Bar({ label, value, max, gradient }) {
   const pct = max > 0 ? Math.round((value / max) * 100) : 0;
@@ -54,11 +55,11 @@ export default function Progress() {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: 'Quizzes Taken', value: perf.totalQuizzes, icon: '📝', gradient: 'from-indigo-500 to-blue-600' },
-            { label: 'Total Score', value: `${perf.totalScore}/${perf.totalMaxScore}`, icon: '🏆', gradient: 'from-purple-500 to-pink-500' },
-            { label: 'Accuracy', value: `${overallPct}%`, icon: '🎯', gradient: overallPct >= 60 ? 'from-green-500 to-teal-500' : 'from-red-500 to-orange-500' },
-            { label: 'Topics', value: perf.topics.length, icon: '📚', gradient: 'from-orange-500 to-yellow-500' },
-          ].map(({ label, value, icon, gradient }, i) => (
+  { label: 'Quizzes Taken', value: perf.totalQuizzes, icon: <FileText size={18} />, gradient: 'from-indigo-500 to-blue-600' },
+  { label: 'Total Score', value: `${perf.totalScore}/${perf.totalMaxScore}`, icon: <Trophy size={18} />, gradient: 'from-purple-500 to-pink-500' },
+  { label: 'Accuracy', value: `${overallPct}%`, icon: <Target size={18} />, gradient: overallPct >= 60 ? 'from-green-500 to-teal-500' : 'from-red-500 to-orange-500' },
+  { label: 'Topics', value: perf.topics.length, icon: <BookOpen size={18} />, gradient: 'from-orange-500 to-yellow-500' },
+].map(({ label, value, icon, gradient }, i) => (
             <div key={label} className={`bg-gradient-to-br ${gradient} rounded-2xl p-5 text-white shadow-lg animate-fade-in`} style={{ animationDelay: `${i * 0.08}s` }}>
               <div className="text-3xl mb-2">{icon}</div>
               <p className="text-2xl font-extrabold">{value}</p>

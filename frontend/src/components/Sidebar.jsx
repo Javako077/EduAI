@@ -120,7 +120,7 @@ export default function Sidebar({ children }) {
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Desktop Sidebar */}
       <aside className={`hidden md:flex flex-col bg-[#1a1a2e] transition-all duration-300 ${collapsed ? 'w-16' : 'w-60'} flex-shrink-0`}>
         <Nav />
@@ -137,7 +137,7 @@ export default function Sidebar({ children }) {
       )}
 
       {/* Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Mobile Bar */}
         <div className="md:hidden bg-[#1a1a2e] px-4 py-3 flex items-center gap-3">
           <button onClick={() => setMobileOpen(true)}
@@ -147,7 +147,7 @@ export default function Sidebar({ children }) {
         <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
           <span className="font-extrabold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">MindAIra</span>
         </div>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   );
