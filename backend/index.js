@@ -20,6 +20,15 @@ app.use('/api/feedback', require('./routes/feedback'));
 
 app.get('/', (req, res) => res.send('FutureEdu API running'));
 
+// Validate required environment variables
+const requiredEnv = ['MONGO_URI', 'JWT_SECRET'];
+requiredEnv.forEach((env) => {
+  if (!process.env[env]) {
+    console.error(`🚨 CRITICAL: Environment variable ${env} is missing!`);
+  }
+});
+
+
 // Connect to MongoDB and then start the server
 const startServer = async () => {
   try {
