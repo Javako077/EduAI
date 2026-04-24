@@ -1,17 +1,6 @@
 const router = require('express').Router();
-const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 const Performance = require('../models/Performance');
-
-function auth(req, res, next) {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'No token' });
-  try {
-    req.userId = jwt.verify(token, process.env.JWT_SECRET).id;
-    next();
-  } catch {
-    res.status(401).json({ message: 'Invalid token' });
-  }
-}
 
 router.get('/', auth, async (req, res) => {
   try {
@@ -22,7 +11,6 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// Called internally after quiz submission
 router.post('/update', auth, async (req, res) => {
   const { topic, score, maxScore } = req.body;
   try {
@@ -49,7 +37,6 @@ router.post('/update', auth, async (req, res) => {
   }
 });
 
-// Track topic from chat
 router.post('/track-topic', auth, async (req, res) => {
   const { topic } = req.body;
   try {

@@ -1,19 +1,8 @@
 const router = require('express').Router();
 const axios = require('axios');
-const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 const ChatHistory = require('../models/ChatHistory');
 const Performance = require('../models/Performance');
-
-function auth(req, res, next) {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'No token' });
-  try {
-    req.userId = jwt.verify(token, process.env.JWT_SECRET).id;
-    next();
-  } catch {
-    res.status(401).json({ message: 'Invalid token' });
-  }
-}
 
 async function callGemini(contents) {
   const { data } = await axios.post(
@@ -30,9 +19,9 @@ router.post('/chat', auth, async (req, res) => {
 
   // 1. Fetch recent history for context
   const historyDoc = await ChatHistory.findOne({ userId: req.userId });
-  const recentMessages = historyDoc?.messages?.slice(-10) || []; // Last 10 messages for context
+  const recentMessages = historyDoc?.messages?.slice(-10) || []; 
 
-  // 2. Format history for Gemini (Map 'assistant' to 'model')
+  // 2. Format history for Gemini
   const historyContext = recentMessages.map(m => ({
     role: m.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: m.content }]
@@ -46,7 +35,6 @@ router.post('/chat', auth, async (req, res) => {
     "topic": "The main academic subject in 1-2 words"
   }`;
 
-  // 3. Combine context with the new question
   const contents = [
     ...historyContext,
     {
