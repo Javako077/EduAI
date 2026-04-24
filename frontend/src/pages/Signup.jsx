@@ -26,8 +26,8 @@ export default function Signup() {
     <div className="min-h-screen flex">
       {/* Left Panel */}
       <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-500 flex-col items-center justify-center p-12 text-white">
-        <img src="/logo.jpeg" alt="Logo" className="w-20 h-20 rounded-3xl object-cover mb-6 shadow-2xl border-4 border-white/20" />
-        <h1 className="text-4xl font-extrabold mb-4">Join FutureEdu</h1>
+       <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9 rounded-lg object-cover border border-white/20"/>
+        <h1 className="text-4xl font-extrabold mb-4">Join MindAIra</h1>
         <p className="text-white/70 text-center text-lg max-w-sm">Start your personalized AI learning journey today — completely free.</p>
         <div className="mt-10 grid grid-cols-2 gap-3 w-full max-w-sm">
           {[
@@ -48,7 +48,7 @@ export default function Signup() {
       <div className="flex-1 flex items-center justify-center bg-gray-50 px-6">
         <div className="w-full max-w-md animate-fade-in">
           <div className="lg:hidden text-center mb-8">
-            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">FutureEdu</span>
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">MindAIra</span>
           </div>
           <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Create your account ✨</h2>
           <p className="text-gray-500 mb-8">Free forever — no credit card needed</p>

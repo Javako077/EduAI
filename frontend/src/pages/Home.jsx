@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+
 const features = [
   { icon: '🧠', title: 'Smart Explanations', desc: 'Step-by-step answers tailored to your level', color: 'from-blue-500 to-indigo-600' },
   { icon: '📝', title: 'AI-Powered Quizzes', desc: '10 questions, 10 minutes — test any topic instantly', color: 'from-purple-500 to-pink-500' },
@@ -15,9 +16,9 @@ export default function Home() {
       {/* Navbar */}
       <nav className="flex justify-between items-center px-8 py-5 max-w-6xl mx-auto">
         <div className="flex items-center gap-2">
-          <img src="/logo.jpeg" alt="Logo" className="w-9 h-9 rounded-lg object-cover border border-white/20" />
-          <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            FutureEdu
+        <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
+            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+           MindAIra
           </span>
         </div>
         <div className="flex gap-3">

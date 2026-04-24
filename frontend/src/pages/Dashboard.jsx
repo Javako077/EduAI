@@ -38,7 +38,7 @@ export default function Dashboard() {
   const actions = [
     {
       to: '/chat',
-      icon: <img src="/logo.jpeg" className="w-12 h-12 rounded-2xl object-cover border-2 border-white/30" />,
+      icon: <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> ,
       label: 'AI Teacher',
       desc: 'Get step-by-step guidance',
       gradient: 'from-indigo-600 to-blue-600',

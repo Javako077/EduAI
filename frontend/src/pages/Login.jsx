@@ -26,8 +26,8 @@ export default function Login() {
     <div className="min-h-screen flex">
       {/* Left Panel */}
       <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex-col items-center justify-center p-12 text-white">
-        <img src="/logo.jpeg" alt="Logo" className="w-20 h-20 rounded-3xl object-cover mb-6 shadow-2xl border-4 border-white/20" />
-        <h1 className="text-4xl font-extrabold mb-4">FutureEdu</h1>
+      <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/>    
+       <h1 className="text-4xl font-extrabold mb-4">MindAIra</h1>
         <p className="text-white/70 text-center text-lg max-w-sm">Your personal AI teacher — available 24/7 to explain, quiz, and guide you.</p>
         <div className="mt-10 space-y-3 w-full max-w-xs">
           {['Smart AI explanations', '10-min timed quizzes', 'Track your weak areas'].map(f => (

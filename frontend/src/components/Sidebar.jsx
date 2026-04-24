@@ -21,7 +21,7 @@ import {
 
 const links = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/chat',      icon: () => <img src="/logo.jpeg" className="w-5 h-5 rounded-md object-cover" />, label: 'AI Teacher' },
+  { to: '/chat',      icon: () => <img src="/mindlogo.png" alt="mindAIra Logo" className="w-4 h-4 rounded-md object-cover"/> , label: 'AI Teacher' },
   { to: '/quiz',      icon: Zap, label: 'Quiz' },
   { to: '/progress',  icon: BarChart3, label: 'Progress' },
   { to: '/profile',   icon: User, label: 'Profile' },
@@ -45,15 +45,15 @@ export default function Sidebar({ children }) {
       <div className={`flex items-center px-4 py-5 border-b border-white/10 ${collapsed ? 'justify-center' : 'justify-between'}`}>
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-lg object-cover border border-white/20" />
+           <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
             <span className="font-extrabold text-lg bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
-              FutureEdu
+            MindAIra
             </span>
           </div>
         )}
         {collapsed && (
-          <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-lg object-cover border border-white/20" />
-        )}
+          <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
+                 )}
         <button
           onClick={onClose || (() => setCollapsed(p => !p))}
           className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition text-sm"
@@ -144,8 +144,8 @@ export default function Sidebar({ children }) {
             className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white">
             <Menu size={20} />
           </button>
-          <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-lg object-cover border border-white/10" />
-          <span className="font-extrabold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">FutureEdu</span>
+        <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
+          <span className="font-extrabold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">MindAIra</span>
         </div>
         <main className="flex-1">{children}</main>
       </div>

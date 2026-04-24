@@ -64,7 +64,7 @@ export default function Chat() {
       <div className="bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between flex-shrink-0 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-11 h-11 rounded-2xl overflow-hidden shadow-lg shadow-indigo-200 border border-white/20">
-            <img src="/logo.jpeg" alt="FutureEdu Logo" className="w-full h-full object-cover" />
+            <img src="/mindlogo.png" alt="mindaira Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <p className="font-bold text-gray-900 text-base">AI Teacher</p>
@@ -90,7 +90,7 @@ export default function Chat() {
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
             <div className="w-24 h-24 rounded-3xl overflow-hidden mb-5 shadow-xl shadow-indigo-500/30 border-4 border-white">
-              <img src="/logo.jpeg" alt="FutureEdu Logo" className="w-full h-full object-cover" />
+              <img src="/mindlogo.png" alt=" Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-2xl font-extrabold text-gray-800 mb-2">Your AI Teacher</h2>
             <p className="text-gray-500 max-w-sm">Ask me anything — I'll explain it step by step like a real teacher.</p>
