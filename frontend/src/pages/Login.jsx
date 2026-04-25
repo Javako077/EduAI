@@ -42,7 +42,7 @@ export default function Login() {
       <div className="flex-1 flex items-center justify-center bg-gray-50 px-6">
         <div className="w-full max-w-md animate-fade-in">
           <div className="lg:hidden text-center mb-8">
-            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">FutureEdu</span>
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">MindAIra</span>
           </div>
           <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Welcome back 👋</h2>
           <p className="text-gray-500 mb-8">Sign in to continue learning</p>

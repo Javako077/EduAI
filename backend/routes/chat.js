@@ -3,6 +3,9 @@ const axios = require('axios');
 const auth = require('../middleware/auth');
 const ChatHistory = require('../models/ChatHistory');
 const Performance = require('../models/Performance');
+const { Ollama } = require('ollama');
+
+const ollama = new Ollama({ host: process.env.OLLAMA_URL || 'http://localhost:11434' });
 
 async function callGemini(contents) {
   const { data } = await axios.post(
@@ -13,6 +16,15 @@ async function callGemini(contents) {
   return parts.find(p => p.text)?.text || '';
 }
 
+async function callOllama(messages) {
+  const response = await ollama.chat({
+    model: process.env.OLLAMA_MODEL || 'llama3',
+    messages: messages,
+    format: 'json',
+  });
+  return response.message.content;
+}
+
 router.post('/chat', auth, async (req, res) => {
   const { question, language = 'English' } = req.body;
   if (!question) return res.status(400).json({ message: 'Question required' });
@@ -21,11 +33,6 @@ router.post('/chat', auth, async (req, res) => {
   const historyDoc = await ChatHistory.findOne({ userId: req.userId });
   const recentMessages = historyDoc?.messages?.slice(-10) || []; 
 
-  // 2. Format history for Gemini
-  const historyContext = recentMessages.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }]
-  }));
 
   const systemPrompt = `You are FutureEdu AI Teacher. Explain concepts clearly, step by step, like a patient and knowledgeable teacher. Always respond in ${language}. 
   
@@ -35,16 +42,32 @@ router.post('/chat', auth, async (req, res) => {
     "topic": "The main academic subject in 1-2 words"
   }`;
 
-  const contents = [
-    ...historyContext,
-    {
-      role: 'user',
-      parts: [{ text: `${systemPrompt}\n\nStudent: ${question}\nTeacher:` }]
-    }
-  ];
-
   try {
-    const rawResponse = await callGemini(contents);
+    let rawResponse;
+    const provider = process.env.AI_PROVIDER || 'gemini';
+
+    if (provider === 'ollama') {
+      const messages = [
+        { role: 'system', content: systemPrompt },
+        ...recentMessages.map(m => ({ role: m.role, content: m.content })),
+        { role: 'user', content: question }
+      ];
+      rawResponse = await callOllama(messages);
+    } else {
+      // Default to Gemini
+      const historyContext = recentMessages.map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+      }));
+      const contents = [
+        ...historyContext,
+        {
+          role: 'user',
+          parts: [{ text: `${systemPrompt}\n\nStudent: ${question}\nTeacher:` }]
+        }
+      ];
+      rawResponse = await callGemini(contents);
+    }
 
     let answer, topic;
     try {
