@@ -48,7 +48,7 @@ export default function Progress() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl font-extrabold text-gray-900">📊 My Progress</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900"> My Progress</h1>
           <p className="text-gray-500 mt-1">Track your learning journey</p>
         </div>
 

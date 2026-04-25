@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+ import { Brain, ClipboardList, BarChart3, Globe } from 'lucide-react';
+
 
 export default function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -31,10 +33,10 @@ export default function Signup() {
         <p className="text-white/70 text-center text-lg max-w-sm">Start your personalized AI learning journey today — completely free.</p>
         <div className="mt-10 grid grid-cols-2 gap-3 w-full max-w-sm">
           {[
-            { icon: <img src="/logo.jpeg" className="w-6 h-6 rounded-md object-cover" />, label: 'AI Teacher' },
-            { icon: '📝', label: 'Smart Quizzes' },
-            { icon: '📊', label: 'Progress Tracking' },
-            { icon: '🌐', label: 'Hindi & English' },
+            { icon: <img src="/mindlogo.png" className="w-6 h-6 rounded-md object-cover" />, label: 'AI Teacher' },
+            { icon: <ClipboardList className="w-6 h-6" />, label: 'Smart Quizzes' },
+            { icon: <BarChart3 className="w-6 h-6" />, label: 'Progress Tracking' },
+            { icon: <Globe className="w-6 h-6" />, label: 'Hindi & English' },
           ].map(({ icon, label }) => (
             <div key={label} className="bg-white/10 rounded-xl px-4 py-3 text-sm text-center">
               <div className="text-2xl mb-1">{icon}</div>
