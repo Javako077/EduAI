@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     setError(''); setLoading(true);
     try {
-      const { data } = await api.post('/auth/login', form);
+      const { data } = await api.post('auth/login', form);
       login(data.token, data.name, data.contact);
       navigate('/dashboard');
     } catch (err) {

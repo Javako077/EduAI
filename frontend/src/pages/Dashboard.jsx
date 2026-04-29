@@ -20,8 +20,8 @@ export default function Dashboard() {
   const [perf, setPerf] = useState(null);
 
   useEffect(() => {
-    api.get('/ai/history').then(({ data }) => setHistory(data)).catch(() => { });
-    api.get('/performance').then(({ data }) => setPerf(data)).catch(() => { });
+    api.get('ai/history').then(({ data }) => setHistory(data)).catch(() => { });
+    api.get('performance').then(({ data }) => setPerf(data)).catch(() => { });
   }, [user.token]);
 
   const totalQuestions = history.filter(m => m.role === 'user').length;

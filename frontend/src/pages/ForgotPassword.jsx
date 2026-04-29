@@ -14,7 +14,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     setMessage(''); setError(''); setLoading(true);
     try {
-      const { data } = await api.post('/auth/forgot-password', { contact: form.contact });
+      const { data } = await api.post('auth/forgot-password', { contact: form.contact });
       setMessage(data.message);
       setStep(2);
     } catch (err) {
@@ -26,7 +26,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     setMessage(''); setError(''); setLoading(true);
     try {
-      await api.post('/auth/verify-otp', { contact: form.contact, otp: form.otp });
+      await api.post('auth/verify-otp', { contact: form.contact, otp: form.otp });
       setStep(3);
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid OTP');
@@ -38,7 +38,7 @@ export default function ForgotPassword() {
     if (form.password !== form.confirmPassword) return setError('Passwords do not match');
     setMessage(''); setError(''); setLoading(true);
     try {
-      await api.post('/auth/reset-password', { 
+      await api.post('auth/reset-password', { 
         contact: form.contact, 
         otp: form.otp, 
         password: form.password 

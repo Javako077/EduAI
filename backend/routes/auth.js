@@ -87,6 +87,7 @@ const crypto = require('crypto');
 router.post('/forgot-password', async (req, res) => {
   try {
     const contact = req.body.contact?.trim();
+    if (!contact) return res.status(400).json({ message: 'Email or Mobile number is required' });
     const user = await User.findOne({ $or: [{ email: contact }, { mobile: contact }] });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
@@ -114,7 +115,10 @@ router.post('/forgot-password', async (req, res) => {
         console.log(`OTP Email sent to: ${contact}`);
       } catch (emailErr) {
         console.error('Failed to send email:', emailErr.message);
-        // We still return success because the OTP was generated and logged for local dev
+        return res.status(500).json({ 
+          message: 'Failed to send OTP email. Please check server logs.', 
+          error: emailErr.message 
+        });
       }
     }
 
