@@ -52,7 +52,7 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link to="/signup" className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-bold text-lg hover:opacity-90 transition shadow-lg shadow-indigo-500/30">
-              Start Learning Free →
+              Start Learning  for Free →
             </Link>
             <Link to="/login" className="px-8 py-3.5 border border-white/20 rounded-2xl font-semibold text-lg hover:bg-white/10 transition">
               Login

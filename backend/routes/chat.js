@@ -3,26 +3,14 @@ const axios = require('axios');
 const auth = require('../middleware/auth');
 const ChatHistory = require('../models/ChatHistory');
 const Performance = require('../models/Performance');
-const { Ollama } = require('ollama');
-
-const ollama = new Ollama({ host: process.env.OLLAMA_URL || 'http://localhost:11434' });
 
 async function callGemini(contents) {
   const { data } = await axios.post(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
     { contents }
   );
   const parts = data.candidates[0].content.parts;
   return parts.find(p => p.text)?.text || '';
-}
-
-async function callOllama(messages) {
-  const response = await ollama.chat({
-    model: process.env.OLLAMA_MODEL || 'llama3',
-    messages: messages,
-    format: 'json',
-  });
-  return response.message.content;
 }
 
 router.post('/chat', auth, async (req, res) => {
@@ -33,7 +21,6 @@ router.post('/chat', auth, async (req, res) => {
   const historyDoc = await ChatHistory.findOne({ userId: req.userId });
   const recentMessages = historyDoc?.messages?.slice(-10) || []; 
 
-
   const systemPrompt = `You are FutureEdu AI Teacher. Explain concepts clearly, step by step, like a patient and knowledgeable teacher. Always respond in ${language}. 
   
   CRITICAL: Return your response ONLY in the following JSON format:
@@ -43,34 +30,22 @@ router.post('/chat', auth, async (req, res) => {
   }`;
 
   try {
-    let rawResponse;
-    const provider = process.env.AI_PROVIDER || 'gemini';
-
-    if (provider === 'ollama') {
-      const messages = [
-        { role: 'system', content: systemPrompt },
-        ...recentMessages.map(m => ({ role: m.role, content: m.content })),
-        { role: 'user', content: question }
-      ];
-      rawResponse = await callOllama(messages);
-    } else {
-      // Default to Gemini
-      const historyContext = recentMessages.map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-      }));
-      const contents = [
-        ...historyContext,
-        {
-          role: 'user',
-          parts: [{ text: `${systemPrompt}\n\nStudent: ${question}\nTeacher:` }]
-        }
-      ];
-      rawResponse = await callGemini(contents);
-    }
+    const historyContext = recentMessages.map(m => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    }));
+    const contents = [
+      ...historyContext,
+      {
+        role: 'user',
+        parts: [{ text: `${systemPrompt}\n\nStudent: ${question}\nTeacher:` }]
+      }
+    ];
+    const rawResponse = await callGemini(contents);
 
     let answer, topic;
     try {
+      // Clean up potential markdown formatting if the model didn't follow JSON strictly
       const jsonStr = rawResponse.replace(/```json/g, '').replace(/```/g, '').trim();
       const parsed = JSON.parse(jsonStr);
       answer = parsed.answer || rawResponse;
@@ -111,3 +86,4 @@ router.get('/history', auth, async (req, res) => {
 });
 
 module.exports = router;
+

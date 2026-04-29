@@ -5,7 +5,7 @@ const Performance = require('../models/Performance');
 
 async function callGemini(prompt) {
   const { data } = await axios.post(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
     { contents: [{ role: 'user', parts: [{ text: prompt }] }] }
   );
   const parts = data.candidates[0].content.parts;
@@ -22,10 +22,12 @@ Return ONLY a valid JSON array, no markdown, no explanation. Format:
 
   try {
     const raw = await callGemini(prompt);
+    
     const jsonStr = raw.replace(/```json|```/g, '').trim();
     const questions = JSON.parse(jsonStr);
     res.json({ topic, questions });
   } catch (err) {
+    console.error('QUIZ GENERATION ERROR:', err.response?.data || err.message);
     res.status(500).json({ message: 'Quiz generation failed', detail: err.message });
   }
 });
@@ -54,3 +56,4 @@ router.post('/submit', auth, async (req, res) => {
 });
 
 module.exports = router;
+

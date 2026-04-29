@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 import { 
   ClipboardList, 
   Brain, 
@@ -23,6 +24,7 @@ const TOTAL_TIME = 10 * 60; // 10 minutes in seconds
 
 export default function Quiz() {
   const { user } = useAuth();
+  const { settings } = useSettings();
   const [topic, setTopic] = useState('');
   const [language, setLanguage] = useState('English');
   const [questions, setQuestions] = useState([]);
@@ -54,7 +56,12 @@ export default function Quiz() {
     setLoading(true); setError(''); setSubmitted(false); setAnswers({});
     setTimeLeft(TOTAL_TIME); setTimerActive(false);
     try {
-      const { data } = await api.post('quiz/generate', { topic, language, count: 10 });
+      const { data } = await api.post('quiz/generate', { 
+        topic, 
+        language, 
+        count: 10,
+        provider: settings.aiProvider 
+      });
       setQuestions(data.questions);
       setTimerActive(true);
     } catch (err) {
@@ -102,7 +109,12 @@ export default function Quiz() {
             <h1 className="text-4xl font-black text-slate-900 tracking-tight flex items-center gap-3">
               <ClipboardList className="text-indigo-600" size={36} /> Quiz Challenge
             </h1>
-            <p className="text-slate-500 mt-2 font-medium">10 questions · 10 minutes · AI-Powered</p>
+            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2">
+              10 questions · 10 minutes · 
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700">
+                ✨ Gemini
+              </span>
+            </p>
           </div>
         </div>
 

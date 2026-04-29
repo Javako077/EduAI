@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { 
@@ -12,6 +13,7 @@ import {
 
 export default function Chat() {
   const { user } = useAuth();
+  const { settings } = useSettings();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,11 @@ export default function Chat() {
     setMessages(prev => [...prev, { role: 'user', content: question }]);
     setLoading(true);
     try {
-      const { data } = await api.post('ai/chat', { question, language });
+      const { data } = await api.post('ai/chat', { 
+        question, 
+        language, 
+        provider: settings.aiProvider 
+      });
       setMessages(prev => [...prev, { role: 'assistant', content: data.answer }]);
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: '⚠️ Could not reach AI. Please try again.' }]);
@@ -69,8 +75,10 @@ export default function Chat() {
           <div>
             <p className="font-bold text-gray-900 text-base">AI Teacher</p>
             <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <p className="text-xs text-green-600 font-semibold tracking-wide uppercase">Always active</p>
+              <span className="w-2 h-2 rounded-full animate-pulse bg-green-500" />
+              <p className="text-xs font-semibold tracking-wide uppercase text-green-600">
+                Cloud Online
+              </p>
             </div>
           </div>
         </div>

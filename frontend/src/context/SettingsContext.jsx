@@ -8,6 +8,7 @@ const DEFAULTS = {
   fontSize: 'medium',
   compactMode: false,
   notifications: true,
+  aiProvider: 'gemini',
 };
 
 export function SettingsProvider({ children }) {

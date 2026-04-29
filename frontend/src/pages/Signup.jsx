@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 
 
 export default function Signup() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', mobile: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -17,7 +17,7 @@ export default function Signup() {
     setError(''); setLoading(true);
     try {
       const { data } = await api.post('/auth/register', form);
-      login(data.token, data.name, data.email);
+      login(data.token, data.name, data.contact);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -69,16 +69,25 @@ export default function Signup() {
                 onChange={e => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
-              <input type="email" placeholder="you@example.com" required
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+              <input type="email" placeholder="you@example.com"
                 className="input-field" value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })} />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Mobile Number</label>
+              <input type="text" placeholder="1234567890"
+                className="input-field" value={form.mobile}
+                onChange={e => setForm({ ...form, mobile: e.target.value })} />
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
               <input type="password" placeholder="Min 6 characters" minLength={6} required
                 className="input-field" value={form.password}
                 onChange={e => setForm({ ...form, password: e.target.value })} />
+              <div className="flex justify-end mt-1.5">
+                <Link to="/forgot-password" size="sm" className="text-xs font-bold text-indigo-600 hover:underline">Forgot password?</Link>
+              </div>
             </div>
             <button type="submit" disabled={loading}
               className="btn-primary w-full py-3 text-base mt-2">

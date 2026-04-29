@@ -12,6 +12,7 @@ import Progress from './pages/Progress';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Feedback from './pages/Feedback';
+import ForgotPassword from './pages/ForgotPassword';
 
 function Protected({ children }) {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/"         element={<Home />} />
             <Route path="/login"    element={<Login />} />
             <Route path="/signup"   element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
             <Route path="/chat"      element={<Protected><Chat /></Protected>} />
             <Route path="/quiz"      element={<Protected><Quiz /></Protected>} />

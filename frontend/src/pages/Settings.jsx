@@ -121,6 +121,33 @@ export default function Settings() {
           </div>
         </Section>
 
+        {/* AI Preferences */}
+        <Section title="🤖 AI Preferences" desc="Choose which AI model powers your experience">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-9 h-9 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-lg">🧠</span>
+              <div>
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">AI Provider</p>
+                <p className="text-xs text-gray-400">Choose the AI model that powers your experience</p>
+              </div>
+            </div>
+            <div className="flex bg-gray-100 dark:bg-gray-700 rounded-xl p-1 gap-1">
+              {[
+                { key: 'gemini', label: 'Gemini', icon: '✨' }
+              ].map(p => (
+                <button
+                  key={p.key}
+                  onClick={() => update('aiProvider', p.key)}
+                  className={`px-4 py-2 rounded-lg flex items-center gap-2 transition font-bold text-xs ${settings.aiProvider === p.key ? 'bg-white dark:bg-gray-600 text-indigo-600 dark:text-indigo-400 shadow' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+                >
+                  <span>{p.icon}</span> {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+        </Section>
+
         {/* Notifications */}
         <Section title="🔔 Notifications" desc="Control alerts and reminders">
          <Row icon={<Bell size={18} />} label="Push Notifications" desc="Get reminders to keep learning">
@@ -132,9 +159,9 @@ export default function Settings() {
         <Section title="About">
           <div className="space-y-3 text-sm">
             {[
-              { label: 'App Name',   value: 'FutureEdu AI Teacher' },
-              { label: 'Version',    value: '2.0.0' },
-              { label: 'AI Model',   value: 'Gemini 2.5 Flash' },
+              { label: 'App Name',   value: 'MindAira AI Teacher' },
+              { label: 'Version',    value: '2.5.0' },
+              { label: 'AI Model',   value: 'Gemini 2.5 Flash (Cloud)' },
               { label: 'Built with', value: 'React + Node.js + MongoDB' },
             ].map(({ label, value }) => (
               <div key={label} className="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
@@ -144,6 +171,7 @@ export default function Settings() {
             ))}
           </div>
         </Section>
+
 
         {/* Reset */}
         <div className="card dark:bg-gray-800 p-6 animate-fade-in">

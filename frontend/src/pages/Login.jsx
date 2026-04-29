@@ -4,7 +4,7 @@ import api from '../api';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ contact: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -15,7 +15,7 @@ export default function Login() {
     setError(''); setLoading(true);
     try {
       const { data } = await api.post('/auth/login', form);
-      login(data.token, data.name, data.email);
+      login(data.token, data.name, data.contact);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
@@ -55,16 +55,19 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
-              <input type="email" placeholder="you@example.com" required
-                className="input-field" value={form.email}
-                onChange={e => setForm({ ...form, email: e.target.value })} />
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email or Mobile Number</label>
+              <input type="text" placeholder="you@example.com or 1234567890" required
+                className="input-field" value={form.contact}
+                onChange={e => setForm({ ...form, contact: e.target.value })} />
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
-              <input type="password" placeholder="••••••••" required
-                className="input-field" value={form.password}
-                onChange={e => setForm({ ...form, password: e.target.value })} />
+                <input type="password" placeholder="••••••••" required
+                  className="input-field" value={form.password}
+                  onChange={e => setForm({ ...form, password: e.target.value })} />
+                <div className="flex justify-end mt-1.5">
+                  <Link to="/forgot-password" size="sm" className="text-xs font-bold text-indigo-600 hover:underline">Forgot password?</Link>
+                </div>
             </div>
             <button type="submit" disabled={loading}
               className="btn-primary w-full py-3 text-base mt-2">
