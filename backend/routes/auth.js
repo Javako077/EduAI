@@ -96,7 +96,10 @@ router.post('/forgot-password', async (req, res) => {
     user.resetOTP = otp;
     user.resetOTPExpires = Date.now() + 600000; // 10 minutes
     await user.save();
-
+    
+    // Log OTP for debugging (Remove in production!)
+    console.log(`[DEBUG] OTP for ${contact}: ${otp}`);
+    
     // Send real email if it's an email address
     if (contact.includes('@')) {
       try {
