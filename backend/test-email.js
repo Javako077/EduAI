@@ -1,33 +1,20 @@
-const nodemailer = require('nodemailer');
+const sendEmail = require('./utils/sendEmail');
 require('dotenv').config();
 
 const test = async () => {
-  console.log('Testing email with:', process.env.EMAIL_USER);
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
+  const recipient = process.env.MAILERSEND_SENDER || "test@example.com";
+  console.log('Testing MailerSend email to:', recipient);
 
   try {
-    await transporter.verify();
-    console.log('✅ Connection verified!');
-    const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: 'Test Email',
-      text: 'If you see this, email is working.'
+    const response = await sendEmail({
+      to: recipient,
+      subject: 'MailerSend Test Email',
+      html: '<h1>Success!</h1><p>If you see this, MailerSend is correctly configured.</p>',
+      text: 'Success! If you see this, MailerSend is correctly configured.'
     });
-    console.log('✅ Email sent:', info.messageId);
+    console.log('✅ Email sent successfully!');
   } catch (err) {
-    console.error('❌ Error:', err.message);
-    if (err.message.includes('EAUTH')) {
-      console.log('TIP: Check your App Password. Make sure 2FA is enabled.');
-    }
+    console.error('❌ Error sending test email:', err.message);
   }
 };
 

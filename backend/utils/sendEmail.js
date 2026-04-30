@@ -1,39 +1,39 @@
-const nodemailer = require('nodemailer');
+const { MailerSend, EmailParams, Sender, Recipient } = require("mailersend");
 
 const sendEmail = async (options) => {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || process.env.EMAIL_USER === 'your-email@gmail.com') {
-    throw new Error('Email credentials not configured in .env file. Please set EMAIL_USER and EMAIL_PASS.');
+  if (!process.env.MAILERSEND_API_KEY) {
+    throw new Error('MAILERSEND_API_KEY not configured in .env file.');
   }
 
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
+  const mailersend = new MailerSend({
+    apiKey: process.env.MAILERSEND_API_KEY.trim(),
   });
 
-  const mailOptions = {
-    from: `"MindAIra Support" <${process.env.EMAIL_USER}>`,
-    to: options.to,
-    subject: options.subject,
-    text: options.text,
-    html: options.html
-  };
+  const sentFrom = new Sender(
+    process.env.MAILERSEND_SENDER || "MS_ZlS9K0@trial-7dnv9g056x2l898m.mlsender.net",
+    "MindAIra Support"
+  );
+  
+  const recipients = [new Recipient(options.to, "User")];
 
-  console.log(`Attempting to send email to ${options.to}...`);
+  const emailParams = new EmailParams()
+    .setFrom(sentFrom)
+    .setTo(recipients)
+    .setReplyTo(sentFrom)
+    .setSubject(options.subject)
+    .setHtml(options.html)
+    .setText(options.text || "");
+
+  console.log(`Attempting to send MailerSend email to ${options.to}...`);
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
-    return info;
+    const response = await mailersend.email.send(emailParams);
+    console.log('Email sent successfully via MailerSend');
+    return response;
   } catch (err) {
-    console.error('Nodemailer Error:', err);
-    throw err;
+    const errorMsg = err.body?.message || err.message || 'Unknown MailerSend Error';
+    console.error('MailerSend Error:', errorMsg);
+    if (err.body?.errors) console.error('Details:', JSON.stringify(err.body.errors));
+    throw new Error(errorMsg);
   }
 };
 
