@@ -6,7 +6,7 @@ const Performance = require('../models/Performance');
 
 async function callGemini(contents) {
   const { data } = await axios.post(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
     { contents }
   );
   const parts = data.candidates[0].content.parts;

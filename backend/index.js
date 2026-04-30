@@ -37,7 +37,7 @@ app.use('/api/feedback', require('./routes/feedback'));
 app.get('/', (req, res) => res.send('FutureEdu API running'));
 
 // Validate required environment variables
-const requiredEnv = ['MONGO_URI', 'JWT_SECRET', 'EMAIL_USER', 'EMAIL_PASS'];
+const requiredEnv = ['MONGO_URI', 'JWT_SECRET', 'MAILERSEND_API_KEY', 'MAILERSEND_SENDER'];
 requiredEnv.forEach((env) => {
   if (!process.env[env]) {
     console.error(`🚨 CRITICAL: Environment variable ${env} is missing!`);
