@@ -21,7 +21,7 @@ router.post('/chat', auth, async (req, res) => {
   const historyDoc = await ChatHistory.findOne({ userId: req.userId });
   const recentMessages = historyDoc?.messages?.slice(-10) || []; 
 
-  const systemPrompt = `You are FutureEdu AI Teacher. Explain concepts clearly, step by step, like a patient and knowledgeable teacher. Always respond in ${language}. 
+  const systemPrompt = `You are MindAIra Teacher. Explain concepts clearly, step by step, like a patient and knowledgeable teacher. Always respond in ${language}. 
   
   CRITICAL: Return your response ONLY in the following JSON format:
   {
