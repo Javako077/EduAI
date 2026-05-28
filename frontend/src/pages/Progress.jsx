@@ -33,7 +33,7 @@ export default function Progress() {
   if (!perf) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center text-gray-400">
-        <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-10 h-10 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
         Loading...
       </div>
     </div>
@@ -55,8 +55,8 @@ export default function Progress() {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-  { label: 'Quizzes Taken', value: perf.totalQuizzes, icon: <FileText size={18} />, gradient: 'from-indigo-500 to-blue-600' },
-  { label: 'Total Score', value: `${perf.totalScore}/${perf.totalMaxScore}`, icon: <Trophy size={18} />, gradient: 'from-purple-500 to-pink-500' },
+  { label: 'Quizzes Taken', value: perf.totalQuizzes, icon: <FileText size={18} />, gradient: 'from-sky-400 to-blue-600' },
+  { label: 'Total Score', value: `${perf.totalScore}/${perf.totalMaxScore}`, icon: <Trophy size={18} />, gradient: 'from-sky-400 to-pink-500' },
   { label: 'Accuracy', value: `${overallPct}%`, icon: <Target size={18} />, gradient: overallPct >= 60 ? 'from-green-500 to-teal-500' : 'from-red-500 to-orange-500' },
   { label: 'Topics', value: perf.topics.length, icon: <BookOpen size={18} />, gradient: 'from-orange-500 to-yellow-500' },
 ].map(({ label, value, icon, gradient }, i) => (
@@ -96,7 +96,7 @@ export default function Progress() {
                 <div key={t.name}>
                   <Bar label={t.name} value={t.totalScore} max={t.maxScore} gradient="from-red-400 to-orange-400" />
                   <div className="flex gap-2 -mt-2 mb-4">
-                    <Link to="/chat" className="text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full hover:bg-indigo-100 transition font-medium">Ask AI →</Link>
+                    <Link to="/chat" className="text-xs bg-sky-500 text-white px-3 py-1 rounded-full hover:bg-sky-500 transition font-medium">Ask AI →</Link>
                     <Link to="/quiz" className="text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full hover:bg-orange-100 transition font-medium">Retry Quiz →</Link>
                   </div>
                 </div>
@@ -126,8 +126,8 @@ export default function Progress() {
             <div className="flex flex-wrap gap-2">
               {exploredTopics.map(t => (
                 <Link key={t.name} to="/quiz"
-                  className="bg-indigo-50 border border-indigo-200 text-indigo-700 px-4 py-2 rounded-full text-sm hover:bg-indigo-100 transition font-medium">
-                  {t.name} <span className="text-indigo-400">({t.questionsAsked}q)</span> →
+                  className="bg-sky-500 border border-sky-500 text-white px-4 py-2 rounded-full text-sm hover:bg-sky-500 transition font-medium">
+                  {t.name} <span className="text-sky-500">({t.questionsAsked}q)</span> →
                 </Link>
               ))}
             </div>

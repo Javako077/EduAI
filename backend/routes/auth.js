@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
     if (!trimmedEmail && !trimmedMobile) {
       return res.status(400).json({ message: 'Please provide either an email or a mobile number' });
     }
-    
+
     // Check if user already exists with either email or mobile
     const existing = await User.findOne({
       $or: [
@@ -27,17 +27,17 @@ router.post('/register', async (req, res) => {
 
     if (existing)
       return res.status(400).json({ message: 'Email or Mobile number already registered' });
-      
-    const user = await User.create({ 
-      name, 
-      email: trimmedEmail || undefined, 
-      mobile: trimmedMobile || undefined, 
-      password 
+
+    const user = await User.create({
+      name,
+      email: trimmedEmail || undefined,
+      mobile: trimmedMobile || undefined,
+      password
     });
-    res.status(201).json({ 
-      token: sign(user._id), 
-      name: user.name, 
-      contact: user.email || user.mobile 
+    res.status(201).json({
+      token: sign(user._id),
+      name: user.name,
+      contact: user.email || user.mobile
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -96,10 +96,10 @@ router.post('/forgot-password', async (req, res) => {
     user.resetOTP = otp;
     user.resetOTPExpires = Date.now() + 600000; // 10 minutes
     await user.save();
-    
+
     // Log OTP for debugging (Remove in production!)
     console.log(`[DEBUG] OTP for ${contact}: ${otp}`);
-    
+
     // Send real email if it's an email address
     if (contact.includes('@')) {
       try {
@@ -118,9 +118,9 @@ router.post('/forgot-password', async (req, res) => {
         console.log(`OTP Email sent to: ${contact}`);
       } catch (emailErr) {
         console.error('Failed to send email:', emailErr.message);
-        return res.status(500).json({ 
-          message: 'Failed to send OTP email. Please check server logs.', 
-          error: emailErr.message 
+        return res.status(500).json({
+          message: 'Failed to send OTP email. Please check server logs.',
+          error: emailErr.message
         });
       }
     }

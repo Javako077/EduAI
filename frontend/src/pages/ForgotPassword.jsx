@@ -52,9 +52,9 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-12">
-      <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl shadow-indigo-100 border border-slate-100 animate-fade-in">
+      <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl shadow-sky-500 border border-slate-100 animate-fade-in">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-sky-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <span className="text-3xl">{step === 1 ? '🔑' : step === 2 ? '🔢' : '🔒'}</span>
           </div>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
@@ -86,7 +86,7 @@ export default function ForgotPassword() {
               <input type="text" required placeholder="name@example.com or 1234567890" className="input-field py-3.5"
                 value={form.contact} onChange={e => setForm({...form, contact: e.target.value})} />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-indigo-300 transition-all active:scale-95">
+            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-sky-500 transition-all active:scale-95">
               {loading ? 'Sending...' : 'Send OTP →'}
             </button>
           </form>
@@ -99,10 +99,10 @@ export default function ForgotPassword() {
               <input type="text" required maxLength={6} placeholder="123456" className="input-field py-3.5 text-center text-2xl tracking-[1rem] font-black"
                 value={form.otp} onChange={e => setForm({...form, otp: e.target.value})} />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-indigo-300 transition-all active:scale-95">
+            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-sky-500 transition-all active:scale-95">
               {loading ? 'Verifying...' : 'Verify Code'}
             </button>
-            <button type="button" onClick={() => setStep(1)} className="w-full text-sm font-bold text-slate-400 hover:text-indigo-600">
+            <button type="button" onClick={() => setStep(1)} className="w-full text-sm font-bold text-slate-400 hover:text-sky-500">
               Change Contact
             </button>
           </form>
@@ -120,14 +120,14 @@ export default function ForgotPassword() {
               <input type="password" required placeholder="••••••••" className="input-field py-3.5"
                 value={form.confirmPassword} onChange={e => setForm({...form, confirmPassword: e.target.value})} />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-indigo-300 transition-all active:scale-95">
+            <button type="submit" disabled={loading} className="btn-primary w-full py-4 text-base font-black shadow-sky-500 transition-all active:scale-95">
               {loading ? 'Updating...' : 'Update Password'}
             </button>
           </form>
         )}
 
         <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-          <Link to="/login" className="text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
+          <Link to="/login" className="text-sm font-bold text-sky-500 hover:text-sky-500 transition-colors">
             Back to Sign In
           </Link>
         </div>

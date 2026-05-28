@@ -20,7 +20,7 @@ app.use(express.json());
 app.use((req, res, next) => {
   console.log(`Body:`, JSON.stringify(req.body));
   const oldJson = res.json;
-  res.json = function(data) {
+  res.json = function (data) {
     console.log(`[${new Date().toISOString()}] Response ${res.statusCode}:`, JSON.stringify(data).substring(0, 200));
     return oldJson.apply(res, arguments);
   };

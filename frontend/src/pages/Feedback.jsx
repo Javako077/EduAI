@@ -71,7 +71,7 @@ export default function Feedback() {
 
         {/* Success Banner */}
         {submitted && (
-          <div className="bg-green-50 border border-green-300 text-green-700 rounded-2xl px-5 py-4 mb-6 flex items-center gap-3 animate-fade-in">
+          <div className="bg-green-50 border border-sky-500 text-green-700 rounded-2xl px-5 py-4 mb-6 flex items-center gap-3 animate-fade-in">
             <span className="text-2xl">🎉</span>
             <div>
               <p className="font-bold">Thank you for your feedback!</p>

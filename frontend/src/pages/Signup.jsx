@@ -27,7 +27,7 @@ export default function Signup() {
   return (
     <div className="min-h-screen flex">
       {/* Left Panel */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-500 flex-col items-center justify-center p-12 text-white">
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-sky-400 via-blue-500 to-blue-700 flex-col items-center justify-center p-12 text-white">
        <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9 rounded-lg object-cover border border-white/20"/>
         <h1 className="text-4xl font-extrabold mb-4">Join MindAIra</h1>
         <p className="text-white/70 text-center text-lg max-w-sm">Start your personalized AI learning journey today — completely free.</p>
@@ -50,7 +50,7 @@ export default function Signup() {
       <div className="flex-1 flex items-center justify-center bg-gray-50 px-6">
         <div className="w-full max-w-md animate-fade-in">
           <div className="lg:hidden text-center mb-8">
-            <span className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">MindAIra</span>
+            <span className="text-3xl font-extrabold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">MindAIra</span>
           </div>
           <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Create your account ✨</h2>
           <p className="text-gray-500 mb-8">Free forever — no credit card needed</p>
@@ -86,7 +86,7 @@ export default function Signup() {
                 className="input-field" value={form.password}
                 onChange={e => setForm({ ...form, password: e.target.value })} />
               <div className="flex justify-end mt-1.5">
-                <Link to="/forgot-password" size="sm" className="text-xs font-bold text-indigo-600 hover:underline">Forgot password?</Link>
+                <Link to="/forgot-password" size="sm" className="text-xs font-bold text-sky-500 hover:underline">Forgot password?</Link>
               </div>
             </div>
             <button type="submit" disabled={loading}
@@ -97,7 +97,7 @@ export default function Signup() {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 font-semibold hover:underline">Sign in</Link>
+            <Link to="/login" className="text-sky-500 font-semibold hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

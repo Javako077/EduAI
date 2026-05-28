@@ -46,7 +46,7 @@ export default function Sidebar({ children }) {
         {!collapsed && (
           <div className="flex items-center gap-2">
            <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
-            <span className="font-extrabold text-lg bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
+            <span className="font-extrabold text-lg bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">
             MindAIra
             </span>
           </div>
@@ -64,7 +64,7 @@ export default function Sidebar({ children }) {
 
       {/* User */}
       <div className={`flex items-center gap-3 px-4 py-4 border-b border-white/10 ${collapsed ? 'justify-center' : ''}`}>
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 text-white font-bold flex items-center justify-center text-sm flex-shrink-0 shadow-lg animate-pulse-ring">
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 text-white font-bold flex items-center justify-center text-sm flex-shrink-0 shadow-lg animate-pulse-ring">
           {initials}
         </div>
         {!collapsed && (
@@ -85,7 +85,7 @@ export default function Sidebar({ children }) {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-sm font-medium animate-slide-in
               ${isActive
-                ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/30'
+                ? 'bg-gradient-to-r from-sky-400 to-blue-500 text-white shadow-lg shadow-sky-500'
                 : 'text-white/60 hover:bg-white/10 hover:text-white'}
               ${collapsed ? 'justify-center' : ''}`
             }
@@ -145,7 +145,7 @@ export default function Sidebar({ children }) {
             <Menu size={20} />
           </button>
         <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> 
-          <span className="font-extrabold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">MindAIra</span>
+          <span className="font-extrabold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">MindAIra</span>
         </div>
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>

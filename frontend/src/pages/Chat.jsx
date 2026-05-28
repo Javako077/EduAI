@@ -69,7 +69,7 @@ export default function Chat() {
       {/* Top Bar */}
       <div className="bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between flex-shrink-0 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-4">
-          <div className="w-11 h-11 rounded-2xl overflow-hidden shadow-lg shadow-indigo-200 border border-white/20">
+          <div className="w-11 h-11 rounded-2xl overflow-hidden shadow-lg shadow-sky-500 border border-white/20">
             <img src="/mindlogo.png" alt="mindaira Logo" className="w-full h-full object-cover" />
           </div>
           <div>
@@ -86,7 +86,7 @@ export default function Chat() {
         <div className="flex bg-gray-100 rounded-xl p-1 text-sm">
           {['English', 'Hindi'].map(lang => (
             <button key={lang} onClick={() => setLanguage(lang)}
-              className={`px-4 py-1.5 rounded-lg transition font-semibold ${language === lang ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow' : 'text-gray-500 hover:text-gray-700'}`}>
+              className={`px-4 py-1.5 rounded-lg transition font-semibold ${language === lang ? 'bg-gradient-to-r from-sky-400 to-blue-500 text-white shadow' : 'text-gray-500 hover:text-gray-700'}`}>
               {lang === 'Hindi' ? '🇮🇳 Hindi' : '🇬🇧 English'}
             </button>
           ))}
@@ -97,7 +97,7 @@ export default function Chat() {
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-3xl w-full mx-auto">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
-            <div className="w-24 h-24 rounded-3xl overflow-hidden mb-5 shadow-xl shadow-indigo-500/30 border-4 border-white">
+            <div className="w-24 h-24 rounded-3xl overflow-hidden mb-5 shadow-xl shadow-sky-500 border-4 border-white">
               <img src="/mindlogo.png" alt=" Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-2xl font-extrabold text-gray-800 mb-2">Your AI Teacher</h2>
@@ -105,7 +105,7 @@ export default function Chat() {
             <div className="flex flex-wrap gap-2 mt-6 justify-center">
               {['What is photosynthesis?', 'Explain Python loops', 'How does gravity work?'].map(q => (
                 <button key={q} onClick={() => setInput(q)}
-                  className="bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-xl text-sm hover:border-indigo-400 hover:text-indigo-600 transition shadow-sm">
+                  className="bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-xl text-sm hover:border-sky-500 hover:text-sky-500 transition shadow-sm">
                   {q}
                 </button>
               ))}
@@ -142,9 +142,9 @@ export default function Chat() {
             </div>
             <div className="chat-bubble-assistant px-5 py-4 rounded-3xl rounded-bl-none">
               <div className="flex gap-1.5 items-center">
-                <span className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span className="w-2.5 h-2.5 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2.5 h-2.5 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2.5 h-2.5 bg-sky-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function Chat() {
         <form onSubmit={send} className="flex gap-3 max-w-3xl mx-auto items-center">
           <button type="button" onClick={startVoice}
             className={`w-12 h-12 rounded-2xl border-2 flex items-center justify-center transition-all flex-shrink-0 shadow-sm ${
-              listening ? 'border-red-400 bg-red-50 text-red-500 animate-pulse' : 'border-gray-100 bg-gray-50 text-gray-500 hover:border-indigo-300 hover:bg-white hover:text-indigo-600'
+              listening ? 'border-red-400 bg-red-50 text-red-500 animate-pulse' : 'border-gray-100 bg-gray-50 text-gray-500 hover:border-sky-500 hover:bg-white hover:text-sky-500'
             }`}>
             {listening ? <MicOff size={24} /> : <Mic size={24} />}
           </button>
@@ -170,7 +170,7 @@ export default function Chat() {
             />
           </div>
           <button type="submit" disabled={loading || !input.trim()}
-            className="btn-primary w-12 h-12 !p-0 rounded-2xl flex items-center justify-center shadow-indigo-200">
+            className="btn-primary w-12 h-12 !p-0 rounded-2xl flex items-center justify-center shadow-sky-500">
             <Send size={20} />
           </button>
         </form>

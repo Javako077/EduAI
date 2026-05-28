@@ -4,7 +4,7 @@ const SettingsContext = createContext();
 
 const DEFAULTS = {
   darkMode: false,
-  accentColor: 'indigo',
+  accentColor: 'sky-500',
   fontSize: 'medium',
   compactMode: false,
   notifications: true,

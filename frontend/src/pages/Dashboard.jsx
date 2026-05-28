@@ -29,8 +29,8 @@ export default function Dashboard() {
   const weakTopics = perf?.topics.filter(t => t.maxScore > 0 && (t.totalScore / t.maxScore) < 0.6) || [];
 
   const stats = [
-    { label: 'Questions Asked', value: totalQuestions, icon: MessageSquare, gradient: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-200' },
-    { label: 'Quizzes Taken', value: perf?.totalQuizzes ?? 0, icon: FileText, gradient: 'from-purple-500 to-pink-500', shadow: 'shadow-purple-200' },
+    { label: 'Questions Asked', value: totalQuestions, icon: MessageSquare, gradient: 'from-blue-500 to-blue-500', shadow: 'shadow-blue-200' },
+    { label: 'Quizzes Taken', value: perf?.totalQuizzes ?? 0, icon: FileText, gradient: 'from-sky-400 to-pink-500', shadow: 'shadow-sky-500' },
     { label: 'Quiz Accuracy', value: overallPct !== null ? `${overallPct}%` : '—', icon: Target, gradient: overallPct >= 60 ? 'from-green-500 to-teal-500' : 'from-red-500 to-orange-500', shadow: overallPct >= 60 ? 'shadow-green-200' : 'shadow-red-200' },
     { label: 'Topics Studied', value: perf?.topics.length ?? 0, icon: BookOpen, gradient: 'from-orange-500 to-yellow-500', shadow: 'shadow-orange-200' },
   ];
@@ -41,7 +41,7 @@ export default function Dashboard() {
       icon: <img src="/mindlogo.png" alt="mindAIra Logo" className="w-9 h-9"/> ,
       label: 'AI Teacher',
       desc: 'Get step-by-step guidance',
-      gradient: 'from-indigo-600 to-blue-600',
+      gradient: 'from-sky-400 to-blue-600',
       actionIcon: <MessageSquare size={20} />
     },
     {
@@ -49,7 +49,7 @@ export default function Dashboard() {
       icon: <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center"><Zap className="text-white" size={28} /></div>,
       label: 'Quick Quiz',
       desc: '10 questions · 10 minutes',
-      gradient: 'from-purple-600 to-pink-600',
+      gradient: 'from-sky-400 to-pink-600',
       actionIcon: <FileText size={20} />
     },
     {
@@ -73,7 +73,7 @@ export default function Dashboard() {
           <p className="text-slate-500 mt-2 font-medium">Ready to continue your learning adventure?</p>
         </div>
         <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100 self-start sm:self-center">
-          <Clock size={16} className="text-indigo-500" />
+          <Clock size={16} className="text-sky-500" />
           <span className="text-sm font-bold text-slate-600">
             {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
           </span>
@@ -141,7 +141,7 @@ export default function Dashboard() {
                   <div className="flex flex-wrap gap-2">
                     {weakTopics.map(t => (
                       <Link key={t.name} to="/quiz"
-                        className="bg-slate-50 border border-slate-100 text-slate-600 px-4 py-2 rounded-xl text-xs hover:bg-slate-100 hover:border-indigo-200 transition-all font-bold">
+                        className="bg-slate-50 border border-slate-100 text-slate-600 px-4 py-2 rounded-xl text-xs hover:bg-slate-100 hover:border-sky-500 transition-all font-bold">
                         {t.name} · {Math.round((t.totalScore / t.maxScore) * 100)}%
                       </Link>
                     ))}
@@ -167,11 +167,11 @@ export default function Dashboard() {
                 <ul className="space-y-3">
                   {history.filter(m => m.role === 'user').slice(-4).reverse().map((m, i) => (
                     <li key={i} className="flex items-center gap-4 group cursor-default">
-                      <div className="w-2 h-2 rounded-full bg-indigo-400 group-hover:scale-150 transition-transform" />
-                      <span className="text-sm font-medium text-slate-600 line-clamp-1 group-hover:text-indigo-600 transition-colors">{m.content}</span>
+                      <div className="w-2 h-2 rounded-full bg-sky-500 group-hover:scale-150 transition-transform" />
+                      <span className="text-sm font-medium text-slate-600 line-clamp-1 group-hover:text-sky-500 transition-colors">{m.content}</span>
                     </li>
                   ))}
-                  <Link to="/chat" className="block text-center text-xs font-bold text-indigo-500 mt-4 hover:underline">View All Conversations</Link>
+                  <Link to="/chat" className="block text-center text-xs font-bold text-sky-500 mt-4 hover:underline">View All Conversations</Link>
                 </ul>
               ) : (
                 <p className="text-sm text-slate-400 text-center py-4">No questions yet.</p>

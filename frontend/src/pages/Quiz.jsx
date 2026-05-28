@@ -107,11 +107,11 @@ export default function Quiz() {
         <div className="mb-10 animate-fade-in flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-              <ClipboardList className="text-indigo-600" size={36} /> Quiz Challenge
+              <ClipboardList className="text-sky-500" size={36} /> Quiz Challenge
             </h1>
             <p className="text-slate-500 mt-2 font-medium flex items-center gap-2">
               10 questions · 10 minutes · 
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-sky-500 text-white">
                 ✨ Gemini
               </span>
             </p>
@@ -120,9 +120,9 @@ export default function Quiz() {
 
         {/* Generate Form */}
         {questions.length === 0 && (
-          <div className="card !rounded-[2.5rem] p-10 animate-fade-in shadow-xl shadow-indigo-100 bg-white border border-slate-100">
+          <div className="card !rounded-[2.5rem] p-10 animate-fade-in shadow-xl shadow-sky-500 bg-white border border-slate-100">
             <div className="text-center mb-10">
-              <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-indigo-200">
+              <div className="w-24 h-24 bg-gradient-to-br from-sky-400 to-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-sky-500">
                 <Brain className="text-white" size={48} />
               </div>
               <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Generate Your Quiz</h2>
@@ -133,7 +133,7 @@ export default function Quiz() {
               <div className="relative group">
                 <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Practice Topic</label>
                 <div className="relative">
-                  <div className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors">
+                  <div className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-sky-500 transition-colors">
                     <Sparkles size={0} />
                   </div>
                   <input
@@ -147,7 +147,7 @@ export default function Quiz() {
 
               <div>
                 <label className="block text-sm font-bold text-slate-700 mb-2 ml-1 flex items-center gap-2">
-                  <Globe size={16} className="text-indigo-500" /> Choose Language
+                  <Globe size={16} className="text-sky-500" /> Choose Language
                 </label>
                 <div className="flex gap-3">
                   {['English', 'Hindi'].map(lang => (
@@ -156,7 +156,7 @@ export default function Quiz() {
                       onClick={() => setLanguage(lang)}
                       className={`flex-1 py-3.5 rounded-2xl border-2 font-black text-sm transition-all duration-200 ${
                         language === lang
-                          ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-md translate-y-[-2px]'
+                          ? 'border-sky-500 bg-sky-500 text-white shadow-md translate-y-[-2px]'
                           : 'border-slate-100 bg-slate-50 text-slate-500 hover:border-slate-200'
                       }`}
                     >
@@ -173,7 +173,7 @@ export default function Quiz() {
               )}
 
               <button type="submit" disabled={loading || !topic.trim()} 
-                className="btn-primary w-full py-4.5 text-lg font-black shadow-indigo-300 transition-all active:scale-95 flex items-center justify-center gap-3">
+                className="btn-primary w-full py-4.5 text-lg font-black shadow-sky-500 transition-all active:scale-95 flex items-center justify-center gap-3">
                 {loading ? (
                   <>
                     <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
@@ -222,7 +222,7 @@ export default function Quiz() {
                   <div className="flex items-center gap-2">
                     <div className="flex -space-x-1">
                       {[...Array(questions.length)].map((_, idx) => (
-                        <div key={idx} className={`w-3 h-3 rounded-full border-2 border-white shadow-sm ${answers[idx] ? 'bg-indigo-500' : 'bg-slate-200'}`} />
+                        <div key={idx} className={`w-3 h-3 rounded-full border-2 border-white shadow-sm ${answers[idx] ? 'bg-sky-500' : 'bg-slate-200'}`} />
                       ))}
                     </div>
                     <span className="text-sm font-black text-slate-700 ml-1">
@@ -244,7 +244,7 @@ export default function Quiz() {
               {questions.map((q, i) => (
                 <div key={i} className="card !rounded-[2.5rem] p-8 animate-fade-in shadow-md bg-white border border-slate-50 transition-all hover:shadow-lg" style={{ animationDelay: `${i * 0.04}s` }}>
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-10 h-10 rounded-[1rem] bg-gradient-to-br from-indigo-500 to-indigo-600 text-white text-lg font-black flex items-center justify-center flex-shrink-0 shadow-lg shadow-indigo-100">
+                    <div className="w-10 h-10 rounded-[1rem] bg-gradient-to-br from-sky-400 to-blue-500 text-white text-lg font-black flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-500">
                       {i + 1}
                     </div>
                     <p className="text-xl font-bold text-slate-800 leading-tight pt-1">{q.question}</p>
@@ -259,15 +259,15 @@ export default function Quiz() {
                           onClick={() => setAnswers(prev => ({ ...prev, [i]: letter }))}
                           className={`w-full text-left px-5 py-4 rounded-2xl border-2 transition-all duration-200 group relative flex items-center gap-4 ${
                             selected
-                              ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-md translate-x-2'
-                              : 'border-slate-100 hover:border-indigo-300 hover:bg-slate-50 text-slate-700'
+                              ? 'border-sky-500 bg-sky-500 text-sky-500 shadow-md translate-x-2'
+                              : 'border-slate-100 hover:border-sky-500 hover:bg-slate-50 text-slate-700'
                           }`}
                         >
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black transition-colors ${selected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600'}`}>
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black transition-colors ${selected ? 'bg-sky-500 text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-sky-500 group-hover:text-sky-500'}`}>
                             {letter}
                           </div>
                           <span className="font-bold flex-1">{opt}</span>
-                          {selected && <CheckCircle2 className="text-indigo-600" size={20} />}
+                          {selected && <CheckCircle2 className="text-sky-500" size={20} />}
                         </button>
                       );
                     })}
@@ -295,22 +295,22 @@ export default function Quiz() {
           <div className="animate-fade-in pb-16">
             {/* Hero Result */}
             <div className={`card !rounded-[3rem] p-12 text-center mb-10 overflow-hidden relative border-4 border-white shadow-2xl ${
-              percentage >= 80 ? 'bg-emerald-50' : percentage >= 60 ? 'bg-indigo-50' : 'bg-rose-50'
+              percentage >= 80 ? 'bg-emerald-50' : percentage >= 60 ? 'bg-sky-500' : 'bg-rose-50'
             }`}>
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
               
               <div className="relative z-10">
                 <div className="w-32 h-32 rounded-[2.5rem] bg-white shadow-xl flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
-                  {percentage >= 80 ? <Sparkles size={64} className="text-emerald-500" /> : percentage >= 60 ? <TrendingUp size={64} className="text-indigo-500" /> : <BookOpen size={64} className="text-rose-500" />}
+                  {percentage >= 80 ? <Sparkles size={64} className="text-emerald-500" /> : percentage >= 60 ? <TrendingUp size={64} className="text-sky-500" /> : <BookOpen size={64} className="text-rose-500" />}
                 </div>
                 
                 <h2 className="text-6xl font-black mb-4 tracking-tighter text-slate-900 leading-none">
-                  <span className="bg-gradient-to-br from-indigo-600 to-purple-600 bg-clip-text text-transparent">{score}</span>
+                  <span className="bg-gradient-to-br from-sky-400 to-blue-500 bg-clip-text text-transparent">{score}</span>
                   <span className="text-slate-300 text-4xl">/{questions.length}</span>
                 </h2>
                 
                 <div className={`inline-flex px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-6 ${
-                  percentage >= 80 ? 'bg-emerald-200 text-emerald-800' : percentage >= 60 ? 'bg-indigo-200 text-indigo-800' : 'bg-rose-200 text-rose-800'
+                  percentage >= 80 ? 'bg-emerald-200 text-emerald-800' : percentage >= 60 ? 'bg-sky-500 text-sky-500' : 'bg-rose-200 text-rose-800'
                 }`}>
                   {percentage}% Correct
                 </div>
@@ -325,7 +325,7 @@ export default function Quiz() {
                     <RefreshCcw size={18} /> New Challenge
                   </button>
                   <Link to="/chat"
-                    className="px-8 py-3.5 rounded-2xl bg-white text-indigo-600 font-black border-2 border-indigo-100 hover:border-indigo-400 hover:bg-indigo-50 transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-sm">
+                    className="px-8 py-3.5 rounded-2xl bg-white text-sky-500 font-black border-2 border-sky-500 hover:border-sky-500 hover:bg-sky-500 transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-sm">
                     <Brain size={18} /> Ask AI Teacher
                   </Link>
                 </div>
@@ -379,11 +379,11 @@ export default function Quiz() {
                       })}
                     </div>
 
-                    <div className="ml-0 sm:ml-14 p-5 bg-indigo-50/50 rounded-2xl border border-indigo-100/50 relative overflow-hidden group">
+                    <div className="ml-0 sm:ml-14 p-5 bg-sky-500 rounded-2xl border border-sky-500 relative overflow-hidden group">
                       <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:scale-150 transition-transform">
-                        <Lightbulb size={40} className="text-indigo-600" />
+                        <Lightbulb size={40} className="text-sky-500" />
                       </div>
-                      <p className="text-sm font-bold text-indigo-700 flex items-center gap-2 mb-1">
+                      <p className="text-sm font-bold text-sky-500 flex items-center gap-2 mb-1">
                         <Lightbulb size={16} /> Explanation
                       </p>
                       <p className="text-sm font-medium text-slate-600 leading-relaxed relative z-10">

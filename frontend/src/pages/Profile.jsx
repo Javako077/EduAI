@@ -57,7 +57,7 @@ export default function Profile() {
           
           {/* Left Column: Profile Card */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl shadow-xl shadow-indigo-100 overflow-hidden border border-white">
+            <div className="bg-white rounded-3xl shadow-xl shadow-sky-500 overflow-hidden border border-white">
               <div className="p-8 text-center">
                 <div className="relative inline-block">
                   <div className="w-32 h-32 rounded-3xl overflow-hidden ring-4 ring-white shadow-2xl mx-auto">
@@ -67,7 +67,7 @@ export default function Profile() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <button className="absolute -bottom-2 -right-2 bg-indigo-600 text-white p-2.5 rounded-2xl shadow-lg hover:bg-indigo-700 transition-all active:scale-95">
+                  <button className="absolute -bottom-2 -right-2 bg-sky-500 text-white p-2.5 rounded-2xl shadow-lg hover:bg-sky-500 transition-all active:scale-95">
                     <Camera size={18} />
                   </button>
                 </div>
@@ -75,13 +75,13 @@ export default function Profile() {
                 <div className="mt-5">
                   <h2 className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-1.5">
                     {profile?.name}
-                    <BadgeCheck size={20} className="text-indigo-500" />
+                    <BadgeCheck size={20} className="text-sky-500" />
                   </h2>
                   <p className="text-gray-500 text-sm mt-1">{profile?.email}</p>
                 </div>
 
                 <div className="mt-6 flex flex-wrap justify-center gap-2">
-                  <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-full border border-indigo-100">
+                  <span className="px-3 py-1 bg-sky-500 text-white  text-xs font-bold rounded-full border border-sky-500">
                     Pro Learner
                   </span>
                   <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full border border-emerald-100">
@@ -107,12 +107,12 @@ export default function Profile() {
             </div>
 
             {/* Stats Card */}
-            <div className="mt-6 bg-indigo-600 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200">
+            <div className="mt-6 bg-sky-500 rounded-3xl p-6 text-white shadow-xl shadow-sky-500">
               <h3 className="text-lg font-bold flex items-center gap-2">
                 <Shield size={20} />
                 Security Status
               </h3>
-              <p className="text-indigo-100 text-sm mt-2 opacity-80">Your account is secured with 2FA and encryption.</p>
+              <p className="text-sky-500 text-sm mt-2 opacity-80">Your account is secured with 2FA and encryption.</p>
               <button className="mt-4 w-full bg-white/20 hover:bg-white/30 backdrop-blur py-2 rounded-xl text-sm font-semibold transition">
                 Manage Security
               </button>
@@ -141,7 +141,7 @@ export default function Profile() {
               </div>
             )}
 
-            <div className="bg-white rounded-3xl shadow-xl shadow-indigo-50 border border-white overflow-hidden">
+            <div className="bg-white rounded-3xl shadow-xl shadow-sky-500 border border-white overflow-hidden">
               <div className="px-8 py-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">Profile Settings</h3>
@@ -150,7 +150,7 @@ export default function Profile() {
                 {!editing && (
                   <button
                     onClick={() => setEditing(true)}
-                    className="flex items-center gap-2 bg-white text-indigo-600 border border-indigo-100 shadow-sm px-5 py-2.5 rounded-2xl hover:shadow-md transition-all font-bold text-sm active:scale-95"
+                    className="flex items-center gap-2 bg-white text-sky-500 border border-sky-500 shadow-sm px-5 py-2.5 rounded-2xl hover:shadow-md transition-all font-bold text-sm active:scale-95"
                   >
                     Edit Info
                   </button>
@@ -169,7 +169,7 @@ export default function Profile() {
                             value={form.name} 
                             onChange={e => setForm({ ...form, name: e.target.value })}
                             required 
-                            className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-indigo-500 rounded-2xl py-3.5 pl-12 pr-4 text-gray-900 font-medium transition-all" 
+                            className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-sky-500 rounded-2xl py-3.5 pl-12 pr-4 text-gray-900 font-medium transition-all" 
                           />
                         </div>
                       </div>
@@ -180,7 +180,7 @@ export default function Profile() {
                           <select 
                             value={form.preferredLanguage} 
                             onChange={e => setForm({ ...form, preferredLanguage: e.target.value })}
-                            className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-indigo-500 rounded-2xl py-3.5 pl-12 pr-4 text-gray-900 font-medium appearance-none transition-all"
+                            className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-sky-500 rounded-2xl py-3.5 pl-12 pr-4 text-gray-900 font-medium appearance-none transition-all"
                           >
                             <option value="English">English (US)</option>
                             <option value="Hindi">Hindi (India)</option>
@@ -198,7 +198,7 @@ export default function Profile() {
                           onChange={e => setForm({ ...form, bio: e.target.value })}
                           rows={4} 
                           placeholder="Tell us about yourself..."
-                          className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-indigo-500 rounded-2xl py-4 pl-12 pr-4 text-gray-900 font-medium resize-none transition-all" 
+                          className="w-full bg-gray-50 border-0 focus:ring-2 focus:ring-sky-500 rounded-2xl py-4 pl-12 pr-4 text-gray-900 font-medium resize-none transition-all" 
                         />
                       </div>
                     </div>
@@ -207,7 +207,7 @@ export default function Profile() {
                       <button 
                         type="submit" 
                         disabled={saving} 
-                        className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 hover:shadow-xl transition-all active:scale-[0.98]"
+                        className="flex-1 bg-gradient-to-r from-sky-400 to-blue-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-sky-500 hover:shadow-xl transition-all active:scale-[0.98]"
                       >
                         {saving ? 'Saving...' : 'Update Profile'}
                       </button>
@@ -241,12 +241,12 @@ export default function Profile() {
             </div>
 
             {/* Achievement Preview */}
-            <div className="bg-white rounded-3xl shadow-xl shadow-indigo-50 border border-white p-8">
+            <div className="bg-white rounded-3xl shadow-xl shadow-sky-500 border border-white p-8">
               <h3 className="text-lg font-bold text-gray-900 mb-6">Recent Achievements</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[1, 2, 3, 4].map(i => (
                   <div key={i} className="group relative">
-                    <div className="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-indigo-200 group-hover:bg-indigo-50/30 transition-all cursor-help">
+                    <div className="aspect-square bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-sky-500 group-hover:bg-sky-500 transition-all cursor-help">
                       <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl filter grayscale group-hover:grayscale-0 transition-all">
                         {['🏆', '🔥', '📚', '⚡'][i-1]}
                       </div>
@@ -270,7 +270,7 @@ function DetailItem({ icon, label, value }) {
     <div className="space-y-1.5">
       <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">{label}</label>
       <div className="flex items-center gap-3.5 bg-gray-50/50 px-5 py-4 rounded-2xl border border-gray-50">
-        <span className="text-indigo-500">{icon && <span className="[&>svg]:w-5 [&>svg]:h-5">{icon}</span>}</span>
+        <span className="text-sky-500">{icon && <span className="[&>svg]:w-5 [&>svg]:h-5">{icon}</span>}</span>
         <span className="text-gray-900 font-bold">{value}</span>
       </div>
     </div>
