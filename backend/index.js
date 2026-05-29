@@ -45,31 +45,17 @@ requiredEnv.forEach((env) => {
 });
 
 
-// Connect to MongoDB and then start the server
-const startServer = async () => {
-  try {
-    // Disable buffering so we don't hang if DB is down
-    mongoose.set('bufferCommands', false);
-
-    await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log('✅ MongoDB connected');
-
-    const PORT = process.env.PORT || 4000;
-    app.listen(PORT, () => console.log(`🚀 Server on http://localhost:${PORT}`));
-  } catch (err) {
-    console.error('❌ MongoDB Connection Error:', err.message);
-    if (err.message.includes('ETIMEOUT') || err.message.includes('selection timed out')) {
-      console.error('👉 TIP: Check if your IP is whitelisted in MongoDB Atlas (0.0.0.0/0 for hosting).');
-    }
-
-    // Start the server anyway so the app doesn't crash on Vercel, 
-    // but queries will fail with a clear error.
-    const PORT = process.env.PORT || 4000;
-    app.listen(PORT, () => console.log(`🚀 Server started in limited mode (No DB Connection)`));
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
+}).then(() => {
+  console.log('✅ MongoDB connected');
+}).catch(err => {
+  console.error('❌ MongoDB Connection Error:', err.message);
+  if (err.message.includes('ETIMEOUT') || err.message.includes('selection timed out')) {
+    console.error('👉 TIP: Check if your IP is whitelisted in MongoDB Atlas (0.0.0.0/0 for hosting).');
   }
-};
+});
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -80,4 +66,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-startServer();
+// Start the server if run directly (e.g. nodemon), otherwise export for serverless (Vercel)
+if (require.main === module) {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`🚀 Server on http://localhost:${PORT}`));
+}
+
+module.exports = app;

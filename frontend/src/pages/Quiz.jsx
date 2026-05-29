@@ -37,12 +37,31 @@ export default function Quiz() {
   const [timerActive, setTimerActive] = useState(false);
   const timerRef = useRef(null);
 
+  // Keep refs of answers, questions, and handleSubmit to prevent stale closure in the timer callback
+  const answersRef = useRef(answers);
+  const questionsRef = useRef(questions);
+  const handleSubmitRef = useRef(null);
+
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  useEffect(() => {
+    questionsRef.current = questions;
+  }, [questions]);
+
   // Timer countdown
   useEffect(() => {
     if (timerActive && !submitted) {
       timerRef.current = setInterval(() => {
         setTimeLeft(t => {
-          if (t <= 1) { clearInterval(timerRef.current); handleSubmit(true); return 0; }
+          if (t <= 1) { 
+            clearInterval(timerRef.current); 
+            if (handleSubmitRef.current) {
+              handleSubmitRef.current(true);
+            }
+            return 0; 
+          }
           return t - 1;
         });
       }, 1000);
@@ -65,7 +84,7 @@ export default function Quiz() {
       setQuestions(data.questions);
       setTimerActive(true);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to generate quiz. Try again.');
+      setError(err.response?.data?.detail || err.response?.data?.message || 'Failed to generate quiz. Try again.');
     } finally {
       setLoading(false);
     }
@@ -74,17 +93,21 @@ export default function Quiz() {
   const handleSubmit = async (autoSubmit = false) => {
     clearInterval(timerRef.current);
     setTimerActive(false);
+    
+    const currentAnswers = answersRef.current;
+    const currentQuestions = questionsRef.current;
+    
     let s = 0;
-    setAnswers(prev => {
-      questions.forEach((q, i) => { if (prev[i] === q.answer) s++; });
-      return prev;
+    currentQuestions.forEach((q, i) => {
+      if (currentAnswers[i] === q.answer) s++;
     });
-    // recalculate synchronously
-    questions.forEach((q, i) => { if (answers[i] === q.answer) s++; });
+    
     setScore(s);
     setSubmitted(true);
-    await api.post('quiz/submit', { topic, score: s, maxScore: questions.length }).catch(() => {});
+    await api.post('quiz/submit', { topic, score: s, maxScore: currentQuestions.length }).catch(() => {});
   };
+
+  handleSubmitRef.current = handleSubmit;
 
   const reset = () => {
     setQuestions([]); setTopic(''); setSubmitted(false);
@@ -259,15 +282,15 @@ export default function Quiz() {
                           onClick={() => setAnswers(prev => ({ ...prev, [i]: letter }))}
                           className={`w-full text-left px-5 py-4 rounded-2xl border-2 transition-all duration-200 group relative flex items-center gap-4 ${
                             selected
-                              ? 'border-sky-500 bg-sky-500 text-sky-500 shadow-md translate-x-2'
+                              ? 'border-sky-500 bg-sky-500 text-white shadow-md translate-x-2'
                               : 'border-slate-100 hover:border-sky-500 hover:bg-slate-50 text-slate-700'
                           }`}
                         >
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black transition-colors ${selected ? 'bg-sky-500 text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-sky-500 group-hover:text-sky-500'}`}>
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black transition-colors ${selected ? 'bg-white text-sky-600' : 'bg-slate-100 text-slate-500 group-hover:bg-sky-500 group-hover:text-white'}`}>
                             {letter}
                           </div>
                           <span className="font-bold flex-1">{opt}</span>
-                          {selected && <CheckCircle2 className="text-sky-500" size={20} />}
+                          {selected && <CheckCircle2 className="text-white" size={20} />}
                         </button>
                       );
                     })}
@@ -295,7 +318,7 @@ export default function Quiz() {
           <div className="animate-fade-in pb-16">
             {/* Hero Result */}
             <div className={`card !rounded-[3rem] p-12 text-center mb-10 overflow-hidden relative border-4 border-white shadow-2xl ${
-              percentage >= 80 ? 'bg-emerald-50' : percentage >= 60 ? 'bg-sky-500' : 'bg-rose-50'
+              percentage >= 80 ? 'bg-emerald-50' : percentage >= 60 ? 'bg-sky-50' : 'bg-rose-50'
             }`}>
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
               
@@ -310,7 +333,7 @@ export default function Quiz() {
                 </h2>
                 
                 <div className={`inline-flex px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest mb-6 ${
-                  percentage >= 80 ? 'bg-emerald-200 text-emerald-800' : percentage >= 60 ? 'bg-sky-500 text-sky-500' : 'bg-rose-200 text-rose-800'
+                  percentage >= 80 ? 'bg-emerald-200 text-emerald-800' : percentage >= 60 ? 'bg-sky-200 text-sky-800' : 'bg-rose-200 text-rose-800'
                 }`}>
                   {percentage}% Correct
                 </div>
@@ -325,7 +348,7 @@ export default function Quiz() {
                     <RefreshCcw size={18} /> New Challenge
                   </button>
                   <Link to="/chat"
-                    className="px-8 py-3.5 rounded-2xl bg-white text-sky-500 font-black border-2 border-sky-500 hover:border-sky-500 hover:bg-sky-500 transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-sm">
+                    className="px-8 py-3.5 rounded-2xl bg-white text-sky-500 font-black border-2 border-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-sm">
                     <Brain size={18} /> Ask AI Teacher
                   </Link>
                 </div>
@@ -379,11 +402,11 @@ export default function Quiz() {
                       })}
                     </div>
 
-                    <div className="ml-0 sm:ml-14 p-5 bg-sky-500 rounded-2xl border border-sky-500 relative overflow-hidden group">
+                    <div className="ml-0 sm:ml-14 p-5 bg-sky-50 rounded-2xl border border-sky-100 relative overflow-hidden group">
                       <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:scale-150 transition-transform">
-                        <Lightbulb size={40} className="text-sky-500" />
+                        <Lightbulb size={40} className="text-sky-600" />
                       </div>
-                      <p className="text-sm font-bold text-sky-500 flex items-center gap-2 mb-1">
+                      <p className="text-sm font-bold text-sky-600 flex items-center gap-2 mb-1">
                         <Lightbulb size={16} /> Explanation
                       </p>
                       <p className="text-sm font-medium text-slate-600 leading-relaxed relative z-10">

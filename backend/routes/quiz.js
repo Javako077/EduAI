@@ -23,7 +23,13 @@ Return ONLY a valid JSON array, no markdown, no explanation. Format:
   try {
     const raw = await callGemini(prompt);
     
-    const jsonStr = raw.replace(/```json|```/g, '').trim();
+    let jsonStr = raw;
+    const jsonMatch = raw.match(/\[\s*\{[\s\S]*\}\s*\]/);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[0];
+    } else {
+      jsonStr = raw.replace(/```json|```/g, '').trim();
+    }
     const questions = JSON.parse(jsonStr);
     res.json({ topic, questions });
   } catch (err) {

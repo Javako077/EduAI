@@ -118,8 +118,18 @@ router.post('/forgot-password', async (req, res) => {
         console.log(`OTP Email sent to: ${contact}`);
       } catch (emailErr) {
         console.error('Failed to send email:', emailErr.message);
+        
+        // If in development mode, provide a fallback so testing can continue
+        if (process.env.NODE_ENV !== 'production') {
+           console.log('⚠️ Using DEV fallback because MailerSend failed.');
+           return res.json({ 
+             message: `Dev Fallback: Email failed (${emailErr.message}). OTP is ${otp}`,
+             otp: otp 
+           });
+        }
+        
         return res.status(500).json({
-          message: 'Failed to send OTP email. Please check server logs.',
+          message: `Failed to send OTP email: ${emailErr.message}`,
           error: emailErr.message
         });
       }
